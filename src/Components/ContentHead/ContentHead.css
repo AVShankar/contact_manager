@@ -1,0 +1,11 @@
+.contact-head{
+    padding: 0px !important;
+}
+
+.customize-icon{
+    background: rgb(255,128,117) !important;
+    background: linear-gradient(83deg, rgba(255,128,117,1) 0%, rgba(254,108,153,1) 85%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+
+}

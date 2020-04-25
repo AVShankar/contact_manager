@@ -1,0 +1,23 @@
+.no-outline:focus {
+    outline: none;
+}
+
+.no-outline{
+    border: none;
+    background: none;
+}
+
+.search-bar{
+    flex: 0 1 70%;
+    padding-left: 1em;
+    padding-right: 1em;
+    border: transparent;
+    background: #3333;
+    border-radius: 30px;
+}
+
+.btn-customize{
+    background: rgb(255,128,117);
+    background: linear-gradient(83deg, rgba(255,128,117,1) 0%, rgba(254,108,153,1) 85%);
+    color: white;
+}
