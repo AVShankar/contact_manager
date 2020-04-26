@@ -12,6 +12,7 @@ import { Modal } from "react-responsive-modal";
 import $ from "jquery";
 import ContentHead from "../ContentHead/ContentHead";
 import ContactDetails from "../ContactDetails/ContactDetails";
+import { Form, Collapse } from "react-bootstrap";
 
 class ContentList extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class ContentList extends React.Component {
       addContactModal: false,
       viewContact: "",
       count: 6,
+      chatModal: false,
     };
   }
 
@@ -235,6 +237,7 @@ class ContentList extends React.Component {
       count: count + 1,
     });
     this.onCloseModal();
+    alert("Contact Created successfully");
   };
 
   onCloseModal = () => {
@@ -243,23 +246,38 @@ class ContentList extends React.Component {
     });
   };
 
+  closeChatModal = () => {
+    this.setState({
+      chatModal: false,
+    });
+  };
+
   resetView = () => {
     const { contacts } = this.state;
     this.setState({
-      viewContact: contacts[0]
+      viewContact: contacts[0],
+    });
+  };
+
+  handleDelete(contact) {
+    const { contacts } = this.state;
+    console.log("delete invoked");
+    this.setState(
+      {
+        contacts: contacts.filter((i) => i !== contact),
+      },
+      () => this.resetView()
+    );
+  }
+
+  openChatModal(contact){
+    this.setState({
+      chatModal: !this.state.chatModal
     })
   }
 
-  handleDelete(contact){
-    const { contacts } = this.state;
-    console.log('delete invoked')
-    this.setState({
-      contacts: contacts.filter(i => i !== contact)
-    }, () => this.resetView())
-  }
-
   render() {
-    const { contacts, addContactModal, viewContact } = this.state;
+    const { contacts, addContactModal, viewContact, chatModal } = this.state;
 
     return (
       <div className="row">
@@ -299,50 +317,58 @@ class ContentList extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {contacts.length !== 0 ? contacts.map((contact) => {
-                    return (
-                      <tr key={contact.id} className="tr-highlight">
-                        <th
-                          scope="row"
-                          onClick={this.detailedView.bind(this, contact)}
-                        >
-                          <input type="checkbox" id={contact.id} />
-                        </th>
-                        <td onClick={this.detailedView.bind(this, contact)}>
-                          <div className="row">
-                            <div className="col-4">
-                              <div
-                                className="rounded-circle p-3 d-flex justify-content-center"
-                                style={{ backgroundColor: contact.color }}
-                              >
-                                <h6>{contact.initial}</h6>
+                  {contacts.length !== 0 ? (
+                    contacts.map((contact) => {
+                      return (
+                        <tr key={contact.id} className="tr-highlight">
+                          <th
+                            scope="row"
+                            onClick={this.detailedView.bind(this, contact)}
+                          >
+                            <input type="checkbox" id={contact.id} />
+                          </th>
+                          <td onClick={this.detailedView.bind(this, contact)}>
+                            <div className="row">
+                              <div className="col-4">
+                                <div
+                                  className="rounded-circle p-3 d-flex justify-content-center"
+                                  style={{ backgroundColor: contact.color }}
+                                >
+                                  <h6>{contact.initial}</h6>
+                                </div>
+                              </div>
+                              <div className="col-8">
+                                <h6>{contact.fName}</h6>
+                                <p className="text-muted">{contact.email}</p>
                               </div>
                             </div>
-                            <div className="col-8">
-                              <h6>{contact.fName}</h6>
-                              <p className="text-muted">{contact.email}</p>
-                            </div>
-                          </div>
-                        </td>
-                        <td onClick={this.detailedView.bind(this, contact)}>
-                          {contact.company}
-                        </td>
-                        <td>
-                          <FontAwesomeIcon
-                            icon={faCommentDots}
-                            className="fa-message"
-                          />{" "}
-                          &nbsp;
-                          <FontAwesomeIcon
-                            icon={faTimes}
-                            className="fa-times"
-                            onClick={this.handleDelete.bind(this, contact)}
-                          />
-                        </td>
-                      </tr>
-                    )
-                  }): <tr><td>No Contacts to display</td></tr>
-                }
+                          </td>
+                          <td onClick={this.detailedView.bind(this, contact)}>
+                            {contact.company}
+                          </td>
+                          <td>
+                            <FontAwesomeIcon
+                              icon={faCommentDots}
+                              className="fa-message"
+                              onClick={this.openChatModal.bind(this, contact)}
+                              aria-controls="example-collapse-text"
+                              aria-expanded={chatModal}
+                            />{" "}
+                            &nbsp;
+                            <FontAwesomeIcon
+                              icon={faTimes}
+                              className="fa-times"
+                              onClick={this.handleDelete.bind(this, contact)}
+                            />
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td>No Contacts to display</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -456,6 +482,44 @@ class ContentList extends React.Component {
         </div>
         <div className="col-md-5 col-sm-12 pt-5">
           <ContactDetails contactDetails={viewContact} />
+          <div className="row pt-5">
+            <div className="col-12 card shadow p-4">
+              <Collapse in={chatModal}>
+                <div id="example-collapse-text">
+                  <h6>
+                    <span className="text-muted">From: </span>Mark Hendry
+                  </h6>
+                  <h6>
+                    <span className="text-muted">To: </span>
+                    <Form.Control as="select" custom >
+                      {contacts.map((contact) => {
+                        return <option key={contact.id}>{contact.fName}</option>;
+                      })}
+                    </Form.Control>
+                  </h6>
+                  <div className="col-md-12">
+                    <div className="form-group">
+                      <label>
+                        <p className="label-txt">Message :</p>
+                        <input
+                          type="text"
+                          className="input"
+                          id="role"
+                          placeholder="Type your Message here"
+                        />
+                        <div className="line-box">
+                          <div className="line"></div>
+                        </div>
+                      </label>
+                    </div>
+                    <div className="d-flex justify-content-end">
+                      <button className="btn btn-customize">Send</button>
+                    </div>
+                  </div>
+                </div>
+              </Collapse>
+            </div>
+          </div>
         </div>
       </div>
     );

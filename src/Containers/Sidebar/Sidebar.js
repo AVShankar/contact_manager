@@ -18,42 +18,42 @@ class Sidebar extends React.Component {
       <div className="side-bar text-center">
         <ul>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faBars} />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faHome} />
             </a>
           </li>
           <li className="active-tab">
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faUser} />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faFile} />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faClock} />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faDatabase} />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faCalendar} />
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="/">
               <FontAwesomeIcon icon={faCog} />
             </a>
           </li>
