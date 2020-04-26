@@ -1,0 +1,59 @@
+{
+    "contacts":[
+    {
+      "id": 1,
+      "fName": "Sheldon Cooper",
+      "email": "sheldon@gmail.com",
+      "phone": "90000 00009",
+      "company": "ABC",
+      "address": "East street",
+      "role": "Physicist",
+      "initial": "SC",
+      "color": "LightGreen"
+    },
+    {
+      "id": 2,
+      "fName": "Leonard Hofstadter",
+      "email": "leo@gmail.com",
+      "phone": "+63123 45432",
+      "company": "ABC",
+      "address": "East street",
+      "role": "Physicist",
+      "initial": "LH",
+      "color": "HotPink"
+    },
+    {
+      "id": 3,
+      "fName": "Rajesh Koothrappali",
+      "email": "rajesh@gmail.com",
+      "phone": "64567 23412",
+      "company": "ABC",
+      "address": "East street",
+      "role": "Physics Department",
+      "initial": "RK",
+      "color": "gray"
+    },
+    {
+      "id": 4,
+      "fName": "Howard Wolowitz",
+      "email": "howie@gmail.com",
+      "phone": "90000 12345",
+      "company": "ABC",
+      "address": "East street",
+      "role": "Engineer",
+      "initial": "HW",
+      "color": "OrangeRed"
+    },
+    {
+      "id": 5,
+      "fName": "Penny Johnson",
+      "email": "penny@gmail.com",
+      "phone": "81234 12345",
+      "company": "ABC",
+      "address": "East street",
+      "role": "Waitress",
+      "initial": "PJ",
+      "color": "DeepSkyBlue"
+    }
+  ]
+}

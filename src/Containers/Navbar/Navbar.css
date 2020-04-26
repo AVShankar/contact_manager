@@ -1,0 +1,9 @@
+ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0;
+}
+
+.nav-list li {
+    padding-right: 1em;
+}
