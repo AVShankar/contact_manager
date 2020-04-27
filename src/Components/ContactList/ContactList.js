@@ -276,6 +276,21 @@ class ContentList extends React.Component {
     })
   }
 
+  onChangeSearch = (event) => {
+    const { contacts } = this.state;
+    if(event.target.value === ""){
+      this.setState({
+        contacts: data.contacts
+      })
+      return true;
+    }
+    data.contacts.map(
+      contact => contact.fName.includes(event.target.value) ? this.setState({
+        contacts: data.contacts.filter(i => i === contact)
+      }) : null
+    )
+  }
+
   render() {
     const { contacts, addContactModal, viewContact, chatModal } = this.state;
 
@@ -290,6 +305,7 @@ class ContentList extends React.Component {
                   type="text"
                   className="no-outline"
                   placeholder="Search contacts"
+                  onChange={this.onChangeSearch}
                 />
                 <span>
                   <FontAwesomeIcon icon={faSearch} />
